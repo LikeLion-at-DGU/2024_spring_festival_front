@@ -13,7 +13,7 @@ function TopBanner() {
     // 날짜가 28, 29, 30 중 하나가 아니라면 28을 반환
     if (![28, 29, 30].includes(day)) {
       return "28";
-    }
+    } else return day;
   };
 
   const todayDate = getCurrentDate();
