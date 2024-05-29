@@ -24,6 +24,10 @@ export const TimeLineTitle = styled.div`
   line-height: 24px; /* 120% */
   letter-spacing: -0.2px;
 `;
+
+export const Caution = styled.div`
+  color: red;
+`;
 export const RealtimeMove = styled.div`
   display: flex;
   padding: 16px 0px;
