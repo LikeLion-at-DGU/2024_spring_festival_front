@@ -12,6 +12,6 @@ export const testerDate = () => {
 
 export const isFestaDate = () => {
   const today = new Date();
-  if (today.getDate() <= 28 && today.getDate() >= 30) return true;
+  if (today.getDate() >= 28 && today.getDate() <= 30) return true;
   else return false; // 축제 당일 여부 T/F 반환
 };
