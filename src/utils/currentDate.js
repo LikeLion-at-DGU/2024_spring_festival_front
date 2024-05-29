@@ -1,7 +1,7 @@
 export const currentDate = () => {
   const today = new Date();
   if (today.getDate() <= 28 && today.getDate() >= 30) return today.getDate();
-  else return 28; // 축제 당일이 아닐 경우, 28일로 초기화(공연, 부스 페이지 - 날짜 컴포넌트)
+  else return 29; // 축제 당일이 아닐 경우, 28일로 초기화(공연, 부스 페이지 - 날짜 컴포넌트)
 };
 
 export const testerDate = () => {
