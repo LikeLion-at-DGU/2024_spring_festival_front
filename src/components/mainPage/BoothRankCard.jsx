@@ -1,10 +1,16 @@
 import React from "react";
 import * as S from "./style/style";
-import { Link } from "react-router-dom";
 
-const BoothRankCard = ({ src, title, heartNum, descript, to, thumImg }) => {
+const BoothRankCard = ({
+  src,
+  title,
+  heartNum,
+  descript,
+  thumImg,
+  onClick,
+}) => {
   return (
-    <S.BoothRankCardWrapper>
+    <S.BoothRankCardWrapper onClick={onClick}>
       <S.BoothRankNum>
         <S.BoothRankNumImg src={src} />
       </S.BoothRankNum>
@@ -19,9 +25,7 @@ const BoothRankCard = ({ src, title, heartNum, descript, to, thumImg }) => {
       </S.BoothRankInfo>
       <S.BoothMore>
         <S.BoothMoreArrow src="/image/mainpage/main_arrow.png" />
-        <Link to={to}>
-          <S.BoothMoreText>더보기</S.BoothMoreText>
-        </Link>
+        <S.BoothMoreText>더보기</S.BoothMoreText>
       </S.BoothMore>
     </S.BoothRankCardWrapper>
   );

@@ -1,4 +1,13 @@
-import { styled } from "styled-components";
+import { styled, keyframes } from "styled-components";
+
+const fadeAnimation = keyframes`
+  0%{
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+`;
 
 export const LineupWrapper = styled.div`
   width: 100%;
@@ -39,10 +48,39 @@ export const LineupLabel = styled.div`
 
   width: 100%;
   position: relative;
-  /* width: ${(props) => (props.artist == props.focusartist ? 200 : 64)}px; */
+
+  transition: width 0.3s ease, transform 0.3s ease;
+
   img {
-    width: ${(props) => (props.artist_id == props.focus_id ? 200 : "")}px;
+    width: ${(props) =>
+      props.artist_id === props.focus_id ? "205px" : "70px"};
     object-fit: cover;
+    transition: width 0.3s ease;
+  }
+
+  @media (max-width: 390px) {
+    img {
+      width: ${(props) =>
+        props.artist_id === props.focus_id ? "200px" : "64px"};
+      object-fit: cover;
+      transition: width 0.3s ease;
+    }
+  }
+  @media (max-width: 365px) {
+    img {
+      width: ${(props) =>
+        props.artist_id === props.focus_id ? "190px" : "54px"};
+      object-fit: cover;
+      transition: width 0.3s ease;
+    }
+  }
+  @media (max-width: 340px) {
+    img {
+      width: ${(props) =>
+        props.artist_id === props.focus_id ? "180px" : "44px"};
+      object-fit: cover;
+      transition: width 0.3s ease;
+    }
   }
 `;
 export const LineupBannerImg = styled.img`
@@ -69,6 +107,10 @@ export const LineupSinger = styled.p`
   left: 8px;
 
   z-index: 10;
+
+  @media (max-width: 380px) {
+    font-size: 10px;
+  }
 `;
 export const PlaylistWrapper = styled.div`
   display: flex;
@@ -97,7 +139,7 @@ export const Playlist = styled.div`
   gap: 12px;
   align-self: stretch;
 `;
-export const Music = styled.div`
+export const Music = styled.a`
   display: flex;
   padding: 8px 12px 8px 8px;
   align-items: center;
@@ -120,7 +162,14 @@ export const PlaylistTitle = styled.div`
   font-weight: 500;
   line-height: 24px; /* 150% */
   letter-spacing: -0.25px;
+
+  animation: ${fadeAnimation} 1s ease-in-out;
+
+  @media (max-width: 385px) {
+    font-size: 14px;
+  }
 `;
+
 export const PlaylistImg = styled.img`
   width: 44px;
   height: 44px;
@@ -128,7 +177,7 @@ export const PlaylistImg = styled.img`
   border: 1px solid var(--use-stroke-stroke---disable, #e2e3ec);
   background: url(<path-to-image>) lightgray 50% / cover no-repeat;
 `;
-export const PlaylistLink = styled.a`
+export const PlaylistLink = styled.img`
   margin-left: auto;
 `;
 export const Line = styled.div`

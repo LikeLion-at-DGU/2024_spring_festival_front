@@ -25,19 +25,20 @@ export const MiniBannerContainer = styled.div`
   bottom: 80px;
   left: 0;
   transform: translateY(100%);
+  display: flex;
   -webkit-transform: translateY(100%);
 
   .slick-track {
     width: 100%;
-    height: 110px;
-    padding-left: 60px;
+    display: flex;
+    padding-left: 70px;
 
     @media (max-width: 391px) {
-      padding-left: 10px;
+      padding-left: 33px;
     }
 
-    @media (max-width: 350px) {
-      padding-left: 60px;
+    @media (max-width: 320px) {
+      padding-left: 70px;
     }
   }
 
@@ -46,26 +47,26 @@ export const MiniBannerContainer = styled.div`
   }
   .slick-list {
     overflow: hidden;
-    height: 110px;
+    height: 120px;
   }
   .slick-slide {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 110px;
+    height: 120px;
     flex: 0 0 auto;
   }
 `;
 
 export const MiniBannerItem = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 12px;
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 20px;
   cursor: pointer;
   object-fit: cover;
 
   &.active {
     box-shadow: 0px 0px 8px 0px rgba(247, 100, 78, 0.6);
-    /* transform: scale(1.1); */
+    transform: scale(1.1);
   }
 `;

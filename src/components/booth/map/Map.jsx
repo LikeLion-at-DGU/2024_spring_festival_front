@@ -1,38 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as S from './style';
 import MarkerBooth from '../../../../public/booth/marker_booth.svg';
+import MarkerFood from '../../../../public/booth/marker_food.svg';
+import MarkerMarket from '../../../../public/booth/marker_market.svg';
 
-const dummyData = [
-  {
-    id: 1,
-    name: '이름1',
-    location: '위치1',
-    latitude: 37.558288,
-    longitude: 127.000173,
-  },
-  {
-    id: 2,
-    name: '이름2',
-    location: '위치2',
-    latitude: 37.54699,
-    longitude: 127.09598,
-  },
-];
-
-const Map = () => {
+const Map = ({
+  data,
+  category,
+  selectedBoothId,
+  resetData,
+  onMarkerClick,
+  isFoodClicked,
+}) => {
   const [map, setMap] = useState();
-  const [data, setData] = useState([]);
+  const markersRef = useRef([]);
 
   useEffect(() => {
     initMap();
-    setData(dummyData);
   }, []);
+
+  useEffect(() => {
+    if (resetData) {
+      initMap();
+    }
+  }, [resetData]);
 
   useEffect(() => {
     if (map) {
       makeMarker(data);
     }
-  }, [map, data]);
+  }, [map, data, category, selectedBoothId]);
 
   const initMap = () => {
     const container = document.getElementById('map');
@@ -43,24 +40,72 @@ const Map = () => {
     setMap(new kakao.maps.Map(container, options));
   };
 
-  const makeMarker = data => {
-    data.forEach(data => {
-      const markerImage = new kakao.maps.MarkerImage(
-        MarkerBooth,
-        new kakao.maps.Size(24, 35)
-      );
-
-      const marker = new kakao.maps.Marker({
-        position: new kakao.maps.LatLng(data.latitude, data.longitude),
-        image: markerImage,
-      });
-      marker.setMap(map);
-    });
+  const changeMarkerImg = category => {
+    switch (category) {
+      case '푸드트럭':
+        return new kakao.maps.MarkerImage(
+          MarkerFood,
+          new kakao.maps.Size(24, 35)
+        );
+      case '플리마켓':
+        return new kakao.maps.MarkerImage(
+          MarkerMarket,
+          new kakao.maps.Size(24, 35)
+        );
+      default:
+        return new kakao.maps.MarkerImage(
+          MarkerBooth,
+          new kakao.maps.Size(24, 35)
+        );
+    }
   };
 
-  useEffect(() => {
-    initMap();
-  }, []);
+  const makeMarker = data => {
+    // 기존 마커 제거
+    markersRef.current.forEach(marker => marker.setMap(null));
+    markersRef.current = [];
+
+    if (data.length > 0) {
+      data.forEach(item => {
+        const markerImage = changeMarkerImg(category);
+
+        const marker = new kakao.maps.Marker({
+          position: new kakao.maps.LatLng(
+            item.location_info.latitude,
+            item.location_info.longitude
+          ),
+          image: markerImage,
+        });
+        marker.setMap(map);
+        markersRef.current.push(marker);
+
+        // Add click event listener for the marker
+        kakao.maps.event.addListener(marker, 'click', () => {
+          onMarkerClick(item.id);
+        });
+
+        if (selectedBoothId === item.id) {
+          map.setCenter(
+            new kakao.maps.LatLng(
+              item.location_info.latitude,
+              item.location_info.longitude
+            )
+          );
+          map.setLevel(2);
+        }
+
+        if (isFoodClicked) {
+          map.setCenter(
+            new kakao.maps.LatLng(
+              item.location_info.latitude,
+              item.location_info.longitude
+            )
+          );
+          map.setLevel(2);
+        }
+      });
+    }
+  };
 
   return (
     <S.MapWrapper>

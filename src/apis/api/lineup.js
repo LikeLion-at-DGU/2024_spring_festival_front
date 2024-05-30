@@ -7,7 +7,7 @@ export const fetchArtists = async (day) => {
     return response.data;
 
   } catch (error) {
-    console.error("API error: ", error);
+    // console.error("API error: ", error);
 
     throw error;
   }
@@ -20,7 +20,7 @@ export const fetchPlaylists = async (artist_id)=>{
     return response.data;
 
   } catch (error) {
-    console.error("API error: ", error);
+    // console.error("API error: ", error);
 
     throw error;
   }

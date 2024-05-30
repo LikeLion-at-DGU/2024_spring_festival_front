@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 //title.jsx
 export const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: ${(props) => (props.marginTop ? props.marginTop : "64px")};
+  margin-top: ${props => (props.$marginTop ? props.$marginTop : '64px')};
   align-items: center;
   justify-content: space-between;
   padding: 20px;
@@ -26,29 +26,34 @@ export const MoreInfo = styled.div`
 
 export const LineUpWrapper = styled.div`
   width: 100%;
-  padding-left: 20px;
+`;
+
+export const LineUpImgWrapper = styled.div`
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  flex-direction: row;
+  /* gap: 20px; */
+
+  .slick-track {
+    display: flex;
+    align-content: flex-end;
+    justify-content: flex-end;
+    flex-wrap: wrap-reverse;
+  }
 `;
 
 export const LineUpImgContainer = styled.div`
-  /* border: 1px solid red; */
-  margin-top: 20px;
-  width: 100%;
-  overflow: hidden;
-  /* display: flex; */
-  flex-direction: row;
-  /* height: 100px; */
-  gap: 20px;
+  border: 1px solid red;
 `;
 
 export const LineUpImg = styled.img`
-  width: 100px;
+  width: 100% !important;
 `;
 
 //BoothRank.jsx
 
-export const BoothRankWrapper = styled.div`
-  /* border: 1px solid red; */
-`;
+export const BoothRankWrapper = styled.div``;
 
 export const BoothRankBg = styled.div`
   background-color: #fbfbfb;
@@ -85,6 +90,7 @@ export const BoothThumImg = styled.img`
 
 export const BoothRankInfo = styled.div`
   width: 50%;
+  margin-left: 5px;
 `;
 
 export const BoothRankTitle = styled.div`
@@ -130,6 +136,7 @@ export const BoothMore = styled.div`
   width: 52px;
   height: 90px;
   cursor: pointer;
+  margin-left: auto;
 `;
 
 export const BoothMoreArrow = styled.img`
@@ -162,14 +169,14 @@ export const NoticeContainer = styled.div`
   .slick-track {
     width: 100%;
     max-height: 180px;
-    padding-left: 140px;
+    padding-left: 117px;
 
     @media (max-width: 380px) {
       padding-left: 75px;
     }
 
     @media (max-width: 350px) {
-      padding-left: 45px;
+      padding-left: 20px;
     }
   }
 `;
@@ -178,12 +185,14 @@ export const NoticeCard = styled.div`
   width: 100%;
   max-width: 120px;
   max-height: 180px;
+  overflow: hidden;
 `;
 
 export const NoticeImg = styled.img`
   width: 120px;
   height: 120px;
   border-radius: 8px;
+  cursor: pointer;
 `;
 
 export const NoticeTitle = styled.div`
@@ -225,10 +234,11 @@ export const PromotionImg = styled.img`
   height: 100px;
   border-radius: 5px;
   background-color: #f1f1f1;
+  cursor: pointer;
 `;
 
 export const PromotionCount = styled.div`
-  padding: 3px 14px;
+  padding: 3px 12px;
   font-size: 10px;
   background-color: #fa9487;
   color: white;

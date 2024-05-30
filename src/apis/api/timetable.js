@@ -7,7 +7,7 @@ export const fetchAllPerformance = async (date, location) => {
     return response.data;
 
   } catch (error) {
-    console.error("API error: ", error);
+    // console.error("API error: ", error);
 
     throw error;
   }

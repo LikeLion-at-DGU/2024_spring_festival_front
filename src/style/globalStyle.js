@@ -6,8 +6,8 @@ export const GlobalStyle = createGlobalStyle`
     --vh: 100%;
     display: flex;
     justify-content: center;
-    background-color: black;
-   }
+    background-color: white;
+    }
 
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, 
@@ -32,6 +32,9 @@ export const GlobalStyle = createGlobalStyle`
   }
   *[hidden] {
       display: none;
+  }
+  * { 
+    font-family: 'Apple SD Gothic Neo' !important;
   }
 
   body {
@@ -109,6 +112,7 @@ export const GlobalStyle = createGlobalStyle`
     scrollbar-width: none; /* 파이어폭스 */
   }
 
-
-
+  .modal-open .header {
+    z-index: 0 !important; /* 모달이 열렸을 때 헤더를 뒤로 보냄 이거 이제 제발 되어라 */
+  }
 `;

@@ -4,26 +4,55 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { createGlobalStyle } from "styled-components";
-
-//사파리 적용 위한 ....
-const GlobalStyle = createGlobalStyle`
-  .sc-duSHzT {
-    width: auto !important;
-  }
-`;
-
 function TopBanner() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const images = [
-    { img: "/image/mainpage/main_bg_0.png" },
-    { img: "/image/mainpage/main_bg.png" },
-    { img: "/image/mainpage/main_bg.png" },
-    { img: "/image/mainpage/main_bg.png" },
-    { img: "/image/mainpage/main_bg.png" },
-    { img: "/image/mainpage/main_bg.png" },
-    { img: "/image/mainpage/main_bg.png" },
+  const getCurrentDate = () => {
+    const today = new Date();
+    const day = today.getDate();
+    // 날짜가 28, 29, 30 중 하나가 아니라면 28을 반환
+    if (![28, 29, 30].includes(day)) {
+      return "28";
+    } else return day;
+  };
+
+  const todayDate = getCurrentDate();
+
+  const banners = [
+    {
+      img: "/image/mainpage/main_BigBanner_0.png",
+      miniImg: "/image/mainpage/main_SmallBanner_0.png",
+    },
+    {
+      img: "/image/mainpage/main_BigBanner_1.png",
+      miniImg: "/image/mainpage/main_SmallBanner_1.png",
+      link: `/booth/${todayDate}`,
+    },
+    {
+      img: "/image/mainpage/main_BigBanner_2.png",
+      miniImg: "/image/mainpage/main_SmallBanner_2.png",
+      link: `/performance/${todayDate}`,
+    },
+    {
+      img: "/image/mainpage/main_BigBanner_3.png",
+      miniImg: "/image/mainpage/main_SmallBanner_3.png",
+      link: "/notice",
+    },
+    {
+      img: "/image/mainpage/main_BigBanner_4.png",
+      miniImg: "/image/mainpage/main_SmallBanner_4.png",
+      link: "/promotion",
+    },
+    {
+      img: "/image/mainpage/main_BigBanner_5.png",
+      miniImg: "/image/mainpage/main_SmallBanner_5.png",
+      link: `/performance/${todayDate}`,
+    },
+    {
+      img: "/image/mainpage/main_BigBanner_6.png",
+      miniImg: "/image/mainpage/main_SmallBanner_6.png",
+      link: "https://docs.google.com/forms/d/e/1FAIpQLSdSW8kBLvk6aCqjM98siWi4i0Xl2v-tZNdoe-mt4QMgep_MFw/viewform",
+    },
   ];
 
   const settings = {
@@ -32,15 +61,15 @@ function TopBanner() {
     infinite: true,
     speed: 500,
     slidesToShow: 3.5,
+    autoplaySpeed: 3000,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
     arrows: false,
-
     responsive: [
       {
         breakpoint: 391,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 3.2,
           slidesToScroll: 1,
         },
       },
@@ -54,23 +83,38 @@ function TopBanner() {
     ],
     beforeChange: (_, newIndex) => {
       setCurrentIndex(newIndex);
-      console.log(newIndex);
     },
   };
 
   return (
     <>
-      <GlobalStyle />
       <S.BannerWrapper>
         <S.BannerContainer>
-          <S.BigBannerImg src={`/image/mainpage/main_bg_${currentIndex}.png`} />
+          <a
+            href={banners[currentIndex].link}
+            target={
+              banners[currentIndex].link ===
+              "https://docs.google.com/forms/d/e/1FAIpQLSdSW8kBLvk6aCqjM98siWi4i0Xl2v-tZNdoe-mt4QMgep_MFw/viewform"
+                ? "_blank"
+                : "_self"
+            }
+            rel={
+              banners[currentIndex].link ===
+              "https://docs.google.com/forms/d/e/1FAIpQLSdSW8kBLvk6aCqjM98siWi4i0Xl2v-tZNdoe-mt4QMgep_MFw/viewform"
+                ? "noopener noreferrer"
+                : ""
+            }
+          >
+            <S.BigBannerImg src={banners[currentIndex].img} loading="lazy" />
+          </a>
           <S.MiniBannerContainer>
             <Slider {...settings}>
-              {images.map((d, index) => (
+              {banners.map((banner, index) => (
                 <S.MiniBannerItem
                   key={index}
-                  src={d.img}
+                  src={banner.miniImg}
                   className={currentIndex === index ? "active" : ""}
+                  loading="lazy"
                 />
               ))}
             </Slider>
