@@ -87,7 +87,7 @@ const TimeLine = ({ date }) => {
         <S.TimeLineWrapper>
           <S.TimeLineTitle>타임 테이블</S.TimeLineTitle>
           <S.Caution>* 연예인 공연시간은 실제와 다를 수 있습니다.</S.Caution>
-          {isFestaDate() && (
+          {isFestaDate(date) && (
             <S.RealtimeMove onClick={handleScrollView}>
               현재 진행중인 공연 보기
             </S.RealtimeMove>
