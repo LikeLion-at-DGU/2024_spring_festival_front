@@ -20,7 +20,9 @@ const Notice = ({ noticeId }) => {
         );
         // console.log(response.data);
 
-        setNotice(response.data);
+        const sortedNotices = response.data.sort((a, b) => b.id - a.id);
+
+        setNotice(sortedNotices);
       } catch (error) {
         // console.error("Error fetching notice:", error);
         setError(error.message);
